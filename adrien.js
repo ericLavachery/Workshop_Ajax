@@ -9,15 +9,16 @@ btn.addEventListener("click", function() {
     ourRequest.onload = function() {
         ourData = JSON.parse(ourRequest.responseText);
         renderHTML(ourData);
-        // console.log(ourData);
     }
     ourRequest.send();
     pageCounter++;
+    if (pageCounter > 3) {
+        btn.classList.add('hide-me');
+    }
 });
 
 function renderHTML(data){
     var htmlString = '';
-
     var i = 0;
     while (i != ourData.length) {
         htmlString += '<strong>' + ourData[i].name + '</strong>';
@@ -45,10 +46,5 @@ function renderHTML(data){
         htmlString += '<br>';
         i = i + 1;
     }
-
-    // console.log(ourData);
-    // console.log(htmlString);
-    // console.log("a text");
-
     animalContainer.insertAdjacentHTML('beforeend', htmlString)
 };
